@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE schema SYSTEM "../../../lib/pkp/dtd/xmlSchema.dtd">
+
+<!--
+  * schema.xml
+  *
+  * Copyright (c) 2014-2019 Simon Fraser University
+  * Copyright (c) 2003-2019 John Willinsky
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  *
+  * Forthcoming plugin schema in XML.
+  *
+  -->
+
+<schema version="0.2">
+    <!--
+     *
+     * TABLE forthcoming
+     *
+     -->
+    <table name="forthcoming">
+        <field name="forthcoming_id" type="I8">
+            <KEY/>
+            <AUTOINCREMENT/>
+        </field>
+        <field name="context_id" type="I8">
+            <NOTNULL/>
+        </field>
+        <descr>List of Forthcoming for each context</descr>
+    </table>
+
+    <!--
+  *
+  * TABLE forthcoming_settings
+  *
+  -->
+    <table name="forthcoming_settings">
+        <field name="forthcoming_id" type="I8">
+            <NOTNULL/>
+        </field>
+        <field name="locale" type="C2" size="14">
+            <NOTNULL/>
+            <DEFAULT VALUE=""/>
+        </field>
+        <field name="setting_name" type="C2" size="255">
+            <NOTNULL/>
+        </field>
+        <field name="setting_value" type="XL"/>
+        <field name="setting_type" type="C2" size="6">
+            <NOTNULL/>
+            <descr>(bool|int|float|string|object)</descr>
+        </field>
+        <descr>Forthcoming settings.</descr>
+        <index name="forthcoming_settings_forthcoming_id">
+            <col>forthcoming_id</col>
+        </index>
+        <index name="forthcoming_settings_pkey">
+            <col>forthcoming_id</col>
+            <col>locale</col>
+            <col>setting_name</col>
+            <UNIQUE/>
+        </index>
+    </table>
+
+    <!--
+*
+* TABLE forthcoming_article
+*
+-->
+    <table name="forthcoming_article">
+        <field name="forthcoming_article_id" type="I8">
+            <KEY/>
+            <AUTOINCREMENT/>
+        </field>
+        <field name="context_id" type="I8">
+            <NOTNULL/>
+        </field>
+        <field name="submission_id" type="I8">
+            <NOTNULL/>
+        </field>
+    </table>
+
+</schema>
